@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import SignUp from './components/signup';
+import Sessions from './components/sessions';
 
 class App extends Component {
   constructor(props){
@@ -21,6 +22,7 @@ class App extends Component {
           </div>
           <div>
             <Route exact path='/signup' component={SignUp} />
+            <Route exact path='/login' component={Sessions} />
           </div>
         </div>
       </Router>

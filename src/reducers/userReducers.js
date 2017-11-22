@@ -1,5 +1,5 @@
 export default function usersReducer(state = {
-  user: {},
+  user_info: [],
   loading: false
 }, action){
 let newState;
@@ -9,8 +9,10 @@ let newState;
       console.log(newState);
       return newState;
     case 'LOGIN':
-      debugger
-      break;
+      newState = Object.assign({}, state, {user_info: {user_id:action.payload.user_id}} );
+      localStorage.setItem("what_you_looking_at", action.payload.what_you_looking_at);
+      console.log(newState);
+      return newState;
     case 'LOADING':
       newState = Object.assign({}, state, {loading: true})
       return newState;

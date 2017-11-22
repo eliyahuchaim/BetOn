@@ -24,6 +24,13 @@ const NavBar = () => {
       activeStyle={{
       background: '#868079'}}
       >Sign Up</NavLink>
+      <NavLink
+      to = '/login'
+      exact
+      style={link}
+      activeStyle={{
+      background: '#868079'}}
+      >Login</NavLink>
     </div>
   );
 }
