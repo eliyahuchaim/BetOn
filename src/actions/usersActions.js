@@ -10,7 +10,7 @@ export function signUp(payload) {
       })
     })
   }
-}
+};
 
 export function login(payload) {
   return dispatch => {
@@ -21,4 +21,12 @@ export function login(payload) {
       })
     })
   }
-}
+};
+
+export function logout() {
+  return dispatch => {
+    dispatch({
+      type: 'LOGOUT'
+    })
+  }
+};

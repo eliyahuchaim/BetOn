@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import SignUp from './components/signup';
 import Sessions from './components/sessions';
+import {logout} from './actions/usersActions';
 
 class App extends Component {
   constructor(props){
@@ -18,7 +19,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <div>
-            <NavBar />
+            <NavBar logout={this.props.logout}/>
           </div>
           <div>
             <Route exact path='/signup' component={SignUp} />
@@ -34,4 +35,10 @@ const mapStateToProps = (state) => {
   return {state}
 }
 
-export default connect(mapStateToProps, null)(App);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    logout: logout
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
