@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import SignUp from './components/signup';
 import Sessions from './components/sessions';
 import {logout} from './actions/usersActions';
+import SearchUser from './components/search-users';
 
 class App extends Component {
   constructor(props){
@@ -24,6 +25,7 @@ class App extends Component {
           <div>
             <Route exact path='/signup' component={SignUp} />
             <Route exact path='/login' component={Sessions} />
+            <Route exact path='/search' component={SearchUser} />
           </div>
         </div>
       </Router>

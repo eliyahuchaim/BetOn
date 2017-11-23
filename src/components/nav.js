@@ -40,6 +40,13 @@ const NavBar = (props) => {
         activeStyle={{
         background: '#868079'}}
         >Login</NavLink>
+        <NavLink
+        to = '/search'
+        exact
+        style={link}
+        activeStyle={{
+        background: '#868079'}}
+        >Find Users</NavLink>
       </div>
     )
   }
