@@ -15,10 +15,14 @@ export function signUp(payload) {
 export function login(payload) {
   return dispatch => {
     return UsersApi.login(payload).then(resp => {
-      dispatch({
-        type: 'LOGIN',
-        payload: resp
-      })
+      if (!resp.message) {
+        dispatch({
+          type: 'LOGIN',
+          payload: resp
+        })
+      } else {
+        console.log(resp);
+      }
     })
   }
 };

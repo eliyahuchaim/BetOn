@@ -2,6 +2,7 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {CurrentUserInfo} from '../actions/usersActions';
+import { Grid, Image, Card, Icon } from 'semantic-ui-react';
 
 
 class UserPage extends React.Component{
@@ -13,10 +14,33 @@ class UserPage extends React.Component{
     this.props.seedCurrentUser(this.props.user.user_id);
   }
 
+  jsx = () => {
+    return (
+      <Grid>
+        <Grid.Column width={4}>
+          <Card>
+            <Image src={this.props.user.user.avatar}/>
+          </Card>
+        </Grid.Column>
+      </Grid>
+    )
+  };
+
+  shouldRender = () => {
+    if (this.props.user.user) {
+      return this.jsx()
+    } else {
+      return null
+    }
+  }
+
 
   render(){
+    // debugger
     return(
-      null
+      <div>
+      {this.shouldRender()}
+      </div>
     )
   }
 };
