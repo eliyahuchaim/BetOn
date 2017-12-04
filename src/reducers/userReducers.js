@@ -1,5 +1,6 @@
 export default function usersReducer(state = {
   user_info: [],
+  public_user : [],
   loading: false
 }, action){
 let newState;
@@ -20,6 +21,12 @@ let newState;
       newState = Object.assign({}, state, {user_info: []});
       localStorage.removeItem('what_you_looking_at');
       console.log("User was logged out");
+      return newState;
+    case 'PUBLIC_USER':
+      newState = Object.assign({}, state, {public_user: action.payload})
+      return newState;
+    case 'CURRENT_USER':
+      newState = Object.assign({}, state, {user_info: action.payload})
       return newState;
     default:
       return state;

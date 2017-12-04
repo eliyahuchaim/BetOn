@@ -9,6 +9,7 @@ import SignUp from './components/signup';
 import Sessions from './components/sessions';
 import {logout} from './actions/usersActions';
 import SearchUser from './components/search-users';
+import UserPage from './components/users-page';
 
 class App extends Component {
   constructor(props){
@@ -26,6 +27,7 @@ class App extends Component {
             <Route exact path='/signup' component={SignUp} />
             <Route exact path='/login' component={Sessions} />
             <Route exact path='/search' component={SearchUser} />
+            <Route exact path='/userpage' component={UserPage} />
           </div>
         </div>
       </Router>

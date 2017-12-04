@@ -21,6 +21,13 @@ const NavBar = (props) => {
     return (
       <div className='nav-in'>
         <Button onClick={props.logout}>Logout</Button>
+        <NavLink
+        to = '/userpage'
+        exact
+        style={link}
+        activeStyle={{
+        background: '#868079'}}
+        >Your Page</NavLink>
       </div>
     )
   } else {

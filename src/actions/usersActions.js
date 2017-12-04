@@ -30,3 +30,26 @@ export function logout() {
     })
   }
 };
+
+
+export function publicUserInfo(id){
+  return dispatch => {
+    return UsersApi.showUser(id).then(resp => {
+      dispatch({
+        type: 'PUBLIC_USER',
+        payload: resp
+      })
+    })
+  }
+};
+
+export function CurrentUserInfo(id){
+  return dispatch => {
+    return UsersApi.showUser(id).then(resp => {
+      dispatch({
+        type: 'CURRENT_USER',
+        payload: resp
+      })
+    })
+  }
+};

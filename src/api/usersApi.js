@@ -35,6 +35,10 @@ export default class UsersApi {
     .then(resp => resp.json())
   }
 
+  static showUser(userID){
+    return fetch(URL + `/${userID}`).then(resp => resp.json())
+  }
+
 
 
 } // end of class
