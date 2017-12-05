@@ -39,6 +39,18 @@ export default class UsersApi {
     return fetch(URL + `/${userID}`).then(resp => resp.json())
   }
 
+  static friends(){
+    return fetch('http://localhost:3000/api/v1/friends', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.what_you_looking_at}`,
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      method: 'GET',
+    })
+    .then(resp => resp.json());
+  };
+
 
 
 } // end of class

@@ -1,7 +1,7 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {CurrentUserInfo} from '../actions/usersActions';
+import {CurrentUserInfo, usersFriends} from '../actions/usersActions';
 import { Grid, Image, Card, Icon } from 'semantic-ui-react';
 
 
@@ -12,6 +12,7 @@ class UserPage extends React.Component{
 
   componentDidMount(){
     this.props.seedCurrentUser(this.props.user.user_id);
+    this.props.usersFriends();
   }
 
   jsx = () => {
@@ -53,7 +54,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators ({
-    seedCurrentUser: CurrentUserInfo
+    seedCurrentUser: CurrentUserInfo,
+    usersFriends: usersFriends
   }, dispatch);
 };
 

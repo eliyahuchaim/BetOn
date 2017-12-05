@@ -57,3 +57,15 @@ export function CurrentUserInfo(id){
     })
   }
 };
+
+export function usersFriends(){
+  return dispatch => {
+    return UsersApi.friends()
+    .then(resp => {
+      dispatch({
+        type: 'FRIENDS',
+        payload: resp
+      })
+    })
+  }
+};

@@ -28,6 +28,10 @@ let newState;
     case 'CURRENT_USER':
       newState = Object.assign({}, state, {user_info: action.payload})
       return newState;
+    case 'FRIENDS':
+      newState = Object.assign({}, state, {friends: action.payload})
+      console.log(newState);
+      return newState;
     default:
       return state;
   }
