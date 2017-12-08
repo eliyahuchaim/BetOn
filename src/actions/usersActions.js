@@ -12,14 +12,15 @@ export function signUp(payload) {
   }
 };
 
-export function login(payload) {
+export function login(payload, props) {
   return dispatch => {
     return UsersApi.login(payload).then(resp => {
       if (!resp.message) {
         dispatch({
           type: 'LOGIN',
           payload: resp
-        })
+        });
+        props.history.push('/userpage');
       } else {
         console.log(resp);
       }
@@ -47,9 +48,9 @@ export function publicUserInfo(id){
   }
 };
 
-export function CurrentUserInfo(id){
+export function CurrentUserInfo(){
   return dispatch => {
-    return UsersApi.showUser(id).then(resp => {
+    return UsersApi.showCurrentUser().then(resp => {
       dispatch({
         type: 'CURRENT_USER',
         payload: resp

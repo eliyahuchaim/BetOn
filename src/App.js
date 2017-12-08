@@ -4,17 +4,20 @@ import './App.css';
 import NavBar from './components/nav';
 import {connect} from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {Redirect} from 'react-router';
 import { bindActionCreators } from 'redux';
 import SignUp from './components/signup';
 import Sessions from './components/sessions';
-import {logout} from './actions/usersActions';
 import SearchUser from './components/search-users';
 import UserPage from './components/users-page';
+import {logout} from './actions/usersActions';
+
 
 class App extends Component {
   constructor(props){
     super(props)
   }
+
 
   render() {
     return (

@@ -35,9 +35,20 @@ export default class UsersApi {
     .then(resp => resp.json())
   }
 
-  static showUser(userID){
-    return fetch(URL + `/${userID}`).then(resp => resp.json())
-  }
+  static showPublicUser(userID){
+    return fetch(URL + `/${userID}`).then(resp => resp.json());
+  };
+
+  static showCurrentUser(){
+    return fetch('http://localhost:3000/api/v1/user/show', {
+      headers: {
+      'Authorization': `Bearer ${localStorage.what_you_looking_at}`,
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    },
+    method: 'GET',
+  }).then(resp => resp.json());
+  };
 
   static friends(){
     return fetch('http://localhost:3000/api/v1/friends', {

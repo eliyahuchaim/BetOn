@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import {NavLink, withRouter} from 'react-router-dom';
 import {Button} from 'semantic-ui-react';
 
 const link = {
@@ -15,12 +15,20 @@ const link = {
   borderRadius: '.28571429rem'
 }
 
+
 const NavBar = (props) => {
-// console.log(props);
+
+  const mainLogout = (props) => {
+    // debugger
+    props.logout();
+    props.history.push("/login");
+  }
+
   if (localStorage.what_you_looking_at) {
     return (
       <div className='nav-in'>
-        <Button onClick={props.logout}>Logout</Button>
+        <Button onClick={() => {mainLogout(props)}}
+        >Logout</Button>
         <NavLink
         to = '/userpage'
         exact
@@ -59,4 +67,4 @@ const NavBar = (props) => {
   }
 };
 
-export default NavBar
+export default withRouter(NavBar);

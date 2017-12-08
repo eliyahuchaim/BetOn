@@ -2,17 +2,32 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {CurrentUserInfo, usersFriends} from '../actions/usersActions';
-import { Grid, Image, Card, Icon } from 'semantic-ui-react';
+import { Grid, Image, Card, Icon, Menu, Label, Sidebar, Segment, Header, Button, Loader} from 'semantic-ui-react';
 
 
 class UserPage extends React.Component{
   constructor(props){
     super(props)
+    this.state = {
+      visible: false,
+      activeItem: ""
+    };
   };
 
+
   componentDidMount(){
-    this.props.seedCurrentUser(this.props.user.user_id);
+    this.props.seedCurrentUser();
     this.props.usersFriends();
+  }
+
+  toggleVisibility = () => {
+    this.setState({
+      visible: !this.state.visible
+    })
+  }
+
+  setActiveItem = () => {
+
   }
 
   jsx = () => {
@@ -23,21 +38,56 @@ class UserPage extends React.Component{
             <Image src={this.props.user.user.avatar}/>
           </Card>
         </Grid.Column>
+        <Grid.Column width={9}>
+          <Button onClick={this.toggleVisibility}>Toggle Visibility</Button>
+          <Sidebar.Pushable as={Segment}>
+            <Sidebar as={Menu} animation='push' direction='bottom' visible={this.state.visible} inverted>
+              <Menu.Item name='parties'>
+                <Icon name='users' />
+                Parties
+              </Menu.Item>
+              <Menu.Item name='bets'>
+                <Icon name='hand victory' />
+                Bets
+              </Menu.Item>
+              <Menu.Item name='wagers'>
+                <Icon name='dollar' />
+                Wagers
+              </Menu.Item>
+            </Sidebar>
+            <Sidebar.Pusher>
+              <Segment basic>
+                <Header as='h3'>Application Content</Header>
+                <Image src='/assets/images/wireframe/paragraph.png' />
+              </Segment>
+            </Sidebar.Pusher>
+          </Sidebar.Pushable>
+        </Grid.Column>
+        <Grid.Column width={3}>
+           <Menu vertical>
+            <Menu.Item name='friends' onClick={""}>
+             <Label color='teal'>{this.props.friends.friends.length}</Label>
+             Friends
+            </Menu.Item>
+           </Menu>
+        </Grid.Column>
       </Grid>
     )
   };
 
   shouldRender = () => {
-    if (this.props.user.user) {
+    if (this.props.user.user && this.props.friends) {
       return this.jsx()
     } else {
-      return null
+      return (
+        <Loader active inline='centered' />
+      )
     }
   }
 
 
   render(){
-    // debugger
+    console.log(this.props);
     return(
       <div>
       {this.shouldRender()}
@@ -48,7 +98,8 @@ class UserPage extends React.Component{
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user.user_info
+    user: state.user.user_info,
+    friends: state.user.friends
   };
 };
 

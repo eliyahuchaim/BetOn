@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {login} from '../actions/usersActions';
 import {Form, Input, Button} from 'semantic-ui-react';
+import {withRouter} from 'react-router-dom';
 
 
 class Sessions extends React.Component{
@@ -20,10 +21,9 @@ class Sessions extends React.Component{
     })
   };
 
-
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.login(this.state);
+    this.props.login(this.state, this.props)
   };
 
   signUpForm = () => {
@@ -36,7 +36,6 @@ class Sessions extends React.Component{
         <Form.Group>
         <Form.Field control={Button}>Login </Form.Field>
         </Form.Group>
-
       </Form>
     )
   };
@@ -54,4 +53,4 @@ const mapDispatchToProps = (dispatch) => {
   }, dispatch)
 };
 
-export default connect(null, mapDispatchToProps)(Sessions);
+export default withRouter(connect(null, mapDispatchToProps)(Sessions));
