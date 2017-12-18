@@ -8,7 +8,7 @@ export default function indexReducer(state = {
       newState = Object.assign({}, state, {loading: true})
       return newState;
     case 'ALL_USERS':
-      newState = Object.assign({}, state, {all_users: action.payload})
+      newState = Object.assign({}, state, {all_users: action.payload.all_users})
       console.log(newState);
       return newState;
     default:

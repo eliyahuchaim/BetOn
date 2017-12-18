@@ -27,7 +27,7 @@ class UserPage extends React.Component{
   }
 
   setActiveItem = () => {
-
+    
   }
 
   jsx = () => {
