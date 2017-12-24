@@ -39,7 +39,7 @@ export function logout() {
 
 export function publicUserInfo(id){
   return dispatch => {
-    return UsersApi.showUser(id).then(resp => {
+    return UsersApi.showPublicUser(id).then(resp => {
       dispatch({
         type: 'PUBLIC_USER',
         payload: resp

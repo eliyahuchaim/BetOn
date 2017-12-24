@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {Form, Sidebar, Segment, Button, Menu, Icon, Header, Image, Card} from 'semantic-ui-react';
 import {getAllUsers} from '../actions/indexActions';
 import {CurrentUserInfo, usersFriends} from '../actions/usersActions';
+import {withRouter} from 'react-router-dom';
 
 class SearchUser extends React.Component{
   constructor(props){
@@ -70,6 +71,13 @@ class SearchUser extends React.Component{
     };
   };
 
+  goToUserPage = (e) => {
+    const id = Number(e.target.id);
+    this.props.history.push(`/user/${id}`);
+  };
+
+
+
   userCard = (payload) => {
     let button;
     if (this.state.friends_table[payload.username]) {
@@ -95,7 +103,7 @@ class SearchUser extends React.Component{
         <Card.Content extra>
           <div className='ui two buttons'>
             {button}
-            <Button basic color='blue'>View Profile</Button>
+            <Button basic color='blue' id={payload.id} onClick={this.goToUserPage}>View Profile</Button>
           </div>
         </Card.Content>
       </Card>
@@ -170,4 +178,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchUser);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchUser));

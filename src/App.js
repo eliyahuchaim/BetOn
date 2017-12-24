@@ -10,6 +10,7 @@ import SignUp from './components/signup';
 import Sessions from './components/sessions';
 import SearchUser from './components/search-users';
 import UserPage from './components/users-page';
+import PublicUserPage from './components/public-users-page';
 import {logout} from './actions/usersActions';
 
 
@@ -27,6 +28,7 @@ class App extends Component {
             <NavBar logout={this.props.logout}/>
           </div>
           <div>
+            <Route exact path='/user/:id' component={PublicUserPage} />
             <Route exact path='/signup' component={SignUp} />
             <Route exact path='/login' component={Sessions} />
             <Route exact path='/search' component={SearchUser} />

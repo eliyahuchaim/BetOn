@@ -36,7 +36,7 @@ export default class UsersApi {
   }
 
   static showPublicUser(userID){
-    return fetch(URL + `/${userID}`).then(resp => resp.json());
+    return fetch('http://localhost:3000/api/v1/publicShow' + `/${userID}`).then(resp => resp.json());
   };
 
   static showCurrentUser(){
