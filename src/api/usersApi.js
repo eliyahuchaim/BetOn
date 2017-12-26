@@ -62,6 +62,24 @@ export default class UsersApi {
     .then(resp => resp.json());
   };
 
+  static sendFriendRequest(to_user_id){
+    const payload = {
+      request: {
+        to_user_id: to_user_id
+      }
+    };
+    return fetch('http://localhost:3000/api/v1/send-friend-request', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.what_you_looking_at}`,
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(payload)
+    })
+    .then(resp => resp.json());
+  };
+
 
 
 } // end of class

@@ -11,6 +11,7 @@ import Sessions from './components/sessions';
 import SearchUser from './components/search-users';
 import UserPage from './components/users-page';
 import PublicUserPage from './components/public-users-page';
+// import FriendRequest from './components/friend-request';
 import {logout} from './actions/usersActions';
 
 

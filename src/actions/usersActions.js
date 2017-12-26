@@ -70,3 +70,10 @@ export function usersFriends(){
     })
   }
 };
+
+export function sendFriendRequest(to_user_id){
+  return dispatch => {
+    return UsersApi.sendFriendRequest(to_user_id)
+    .then(resp => resp)
+  };
+};

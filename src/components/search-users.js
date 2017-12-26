@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Form, Sidebar, Segment, Button, Menu, Icon, Header, Image, Card} from 'semantic-ui-react';
 import {getAllUsers} from '../actions/indexActions';
-import {CurrentUserInfo, usersFriends} from '../actions/usersActions';
+import {CurrentUserInfo, usersFriends, sendFriendRequest} from '../actions/usersActions';
 import {withRouter} from 'react-router-dom';
 
 class SearchUser extends React.Component{
@@ -47,7 +47,6 @@ class SearchUser extends React.Component{
     let results = this.props.all_users.filter(user => {
       return user.username.includes(search) && user.username[0] == search[0] && user.username != this.props.user.user.username
     });
-    // debugger
     if (friends) {
       this.setState({
         users_arr: results,
@@ -76,14 +75,18 @@ class SearchUser extends React.Component{
     this.props.history.push(`/user/${id}`);
   };
 
+  sendFriendRequest = (e) => {
+    const id = Number(e.target.id);
+    this.props.sendFriendRequest(id);
 
+  }
 
   userCard = (payload) => {
     let button;
     if (this.state.friends_table[payload.username]) {
       button = <Button basic color='green'>Already Friends</Button>
     } else {
-      button = <Button basic color='green'>Send Friend Request</Button>
+      button = <Button onClick={this.sendFriendRequest} id={payload.id} basic color='green'>Send Friend Request</Button>
     }
 
     return (
@@ -166,7 +169,8 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     getAllUsers: getAllUsers,
     seedCurrentUser: CurrentUserInfo,
-    usersFriends: usersFriends
+    usersFriends: usersFriends,
+    sendFriendRequest: sendFriendRequest
   }, dispatch)
 };
 
