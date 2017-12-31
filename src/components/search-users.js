@@ -18,7 +18,6 @@ class SearchUser extends React.Component{
 
   createFriendsTable = () => {
     try {
-      // debugger
       if (this.props.friends && !Object.keys(this.state.friends_table).length) {
         let friends_obj = new Object;
         let friends = this.props.friends.friends;
@@ -115,7 +114,6 @@ class SearchUser extends React.Component{
 
   createUserCards = () => {
     this.createFriendsTable()
-    // debugger
     return this.state.users_arr.map(user => {
       return this.userCard(user)
     })

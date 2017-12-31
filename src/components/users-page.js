@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {CurrentUserInfo, usersFriends} from '../actions/usersActions';
 import { Grid, Image, Card, Icon, Menu, Label, Sidebar, Segment, Header, Button, Loader} from 'semantic-ui-react';
+import {withRouter} from 'react-router-dom';
 
 
 class UserPage extends React.Component{
@@ -27,7 +28,11 @@ class UserPage extends React.Component{
   }
 
   setActiveItem = () => {
-    
+
+  };
+
+  goToRequests = () => {
+    this.props.history.push('/requests');
   }
 
   jsx = () => {
@@ -68,6 +73,10 @@ class UserPage extends React.Component{
             <Menu.Item name='friends' onClick={""}>
              <Label color='teal'>{this.props.friends.friends.length}</Label>
              Friends
+            </Menu.Item>
+            <Menu.Item name='requests' onClick={this.goToRequests}>
+             <Label color='teal'>{this.props.friends.requests.length}</Label>
+             Friend Requests
             </Menu.Item>
            </Menu>
         </Grid.Column>
@@ -110,4 +119,4 @@ const mapDispatchToProps = (dispatch) => {
   }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserPage));

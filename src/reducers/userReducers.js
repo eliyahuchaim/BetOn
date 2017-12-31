@@ -1,7 +1,8 @@
 export default function usersReducer(state = {
   user_info: [],
   public_user : [],
-  loading: false
+  loading: false,
+  friends: {friends: {}, requests: {}}
 }, action){
 let newState;
   switch (action.type) {

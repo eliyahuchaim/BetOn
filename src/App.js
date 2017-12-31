@@ -11,7 +11,7 @@ import Sessions from './components/sessions';
 import SearchUser from './components/search-users';
 import UserPage from './components/users-page';
 import PublicUserPage from './components/public-users-page';
-// import FriendRequest from './components/friend-request';
+import FriendRequest from './components/friend-requests';
 import {logout} from './actions/usersActions';
 
 
@@ -31,6 +31,7 @@ class App extends Component {
           <div>
             <Route exact path='/user/:id' component={PublicUserPage} />
             <Route exact path='/signup' component={SignUp} />
+            <Route exact path='/requests' component={FriendRequest} />
             <Route exact path='/login' component={Sessions} />
             <Route exact path='/search' component={SearchUser} />
             <Route exact path='/userpage' component={UserPage} />
