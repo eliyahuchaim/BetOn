@@ -77,3 +77,10 @@ export function sendFriendRequest(to_user_id){
     .then(resp => resp)
   };
 };
+
+export function updateFriendRequest(payload) {
+  return dispatch => {
+    return UsersApi.updateFriendRequest(payload.r_id, payload.accepted)
+    .then(resp => resp)
+  };
+};

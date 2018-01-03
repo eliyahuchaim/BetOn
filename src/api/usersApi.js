@@ -80,6 +80,24 @@ export default class UsersApi {
     .then(resp => resp.json());
   };
 
+  static updateFriendRequest(id, accepted){
+    const data = {
+      request: {
+        request_id: id,
+        accepted: accepted
+      }
+    };
 
+    return fetch('http://localhost:3000/api/v1/update-request', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.what_you_looking_at}`,
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+  };
 
 } // end of class
