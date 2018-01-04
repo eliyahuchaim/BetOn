@@ -1,7 +1,7 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {usersFriends, updateFriendRequest} from '../actions/usersActions';
+import {usersFriends, updateFriendRequestBatch} from '../actions/usersActions';
 import UsersApi from '../api/usersApi';
 import { Button, Card, Image } from 'semantic-ui-react'
 
@@ -10,7 +10,8 @@ class FriendRequest extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      usersData:[]
+      usersData: [],
+      requests: {}
     };
   };
 
@@ -31,9 +32,9 @@ class FriendRequest extends React.Component{
       usersData.push(new Promise(
         (resolve, reject) => {
           this.showPublicUser(req.from_user_id)
-          .then(resp => {resolve(this.singleCard(req, resp.user))})
-        }
-        )
+          .then(resp => {resolve(this.singleCard(req, resp.user))
+          })
+        })
       )
     }
     Promise.all(usersData).then(el => {
@@ -41,6 +42,38 @@ class FriendRequest extends React.Component{
         usersData: el
       })
     })
+  };
+
+  componentWillUnmount(){
+    this.props.updateFriendRequestBatch(this.state.requests);
+  };
+
+  addRequests = (e) => {
+    e.preventDefault();
+    const reqId = e.target.parentElement.parentElement.parentElement.id;
+    const accepted = e.target.value;
+    const req = {
+      id: reqId,
+      accepted: accepted
+    };
+
+    if (!Object.keys(this.state.requests).length) {
+      this.setState({
+      requests: {[req.id]: req}
+      })
+      console.log("updated", this.state.requests);
+    } else {
+      if (this.state.requests[req.id]) {
+        this.state.requests[req.id].accepted = req.accepted
+        console.log(this.state);
+      } else {
+        let temp = this.state.requests
+        temp[req.id] = req
+        this.setState({
+          requests: temp
+        })
+      }
+    }
   };
 
 
@@ -58,8 +91,8 @@ class FriendRequest extends React.Component{
           </Card.Content>
           <Card.Content extra>
           <div className='ui two buttons'>
-            <Button basic color='green'>Accept</Button>
-            <Button basic color='red'>Decline</Button>
+            <Button active basic color='green' value={true} onClick={this.addRequests}>Accept</Button>
+            <Button active basic color='red' value={false} onClick={this.addRequests}>Decline</Button>
           </div>
           <Button basic color='yellow'>View Profile</Button>
         </Card.Content>
@@ -76,7 +109,6 @@ class FriendRequest extends React.Component{
         if (this.state.usersData.length !== this.props.requests.length) {
           this.cards()
         } else {
-          console.log("in here boy");
           return (
             <Card.Group>
               {this.state.usersData}
@@ -113,7 +145,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     usersFriends: usersFriends,
-    updateFriendRequest: updateFriendRequest,
+    updateFriendRequestBatch: updateFriendRequestBatch,
     publicUser: UsersApi
   }, dispatch);
 };

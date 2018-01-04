@@ -80,12 +80,9 @@ export default class UsersApi {
     .then(resp => resp.json());
   };
 
-  static updateFriendRequest(id, accepted){
+  static updateFriendRequest(payload){
     const data = {
-      request: {
-        request_id: id,
-        accepted: accepted
-      }
+      request: payload
     };
 
     return fetch('http://localhost:3000/api/v1/update-request', {

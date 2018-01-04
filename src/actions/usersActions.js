@@ -78,9 +78,13 @@ export function sendFriendRequest(to_user_id){
   };
 };
 
-export function updateFriendRequest(payload) {
+export function updateFriendRequestBatch(payload) {
   return dispatch => {
-    return UsersApi.updateFriendRequest(payload.r_id, payload.accepted)
-    .then(resp => resp)
+    UsersApi.updateFriendRequest(payload)
   };
+};
+
+export function updateFriendRequest(request) {
+    return UsersApi.updateFriendRequest(request)
+    .then(resp => {console.log(resp);})
 };
