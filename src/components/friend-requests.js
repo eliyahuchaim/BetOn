@@ -50,6 +50,24 @@ class FriendRequest extends React.Component{
 
   addRequests = (e) => {
     e.preventDefault();
+    // change inner text for button that is clicked on.
+    let TargetButton = e.target.innerText;
+
+    if (TargetButton == 'Accept') {
+      TargetButton = 'Accepted';
+      e.target.parentElement.children[1].innerText = 'Decline';
+    } else if (TargetButton == 'Decline'){
+      TargetButton = 'Declined';
+      e.target.parentElement.children[0].innerText = 'Accept';
+    } else if (TargetButton == 'Accepted') {
+      TargetButton = 'Accept';
+    } else if (TargetButton == 'Declined') {
+      TargetButton = 'Decline';
+    }
+
+    e.target.innerText = TargetButton;
+
+
     const reqId = e.target.parentElement.parentElement.parentElement.id;
     const accepted = e.target.value;
     const req = {
@@ -61,11 +79,9 @@ class FriendRequest extends React.Component{
       this.setState({
       requests: {[req.id]: req}
       })
-      console.log("updated", this.state.requests);
     } else {
       if (this.state.requests[req.id]) {
         this.state.requests[req.id].accepted = req.accepted
-        console.log(this.state);
       } else {
         let temp = this.state.requests
         temp[req.id] = req
@@ -127,7 +143,6 @@ class FriendRequest extends React.Component{
   };
 
   render(){
-    console.log("this is state for requests:", this.state);
     return (
       <div>
       {this.jsx()}

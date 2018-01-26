@@ -75,6 +75,9 @@ class SearchUser extends React.Component{
   };
 
   sendFriendRequest = (e) => {
+    if (e.target.innerText == "Send Friend Request") {
+      e.target.innerText = "Request Sent";
+    }
     const id = Number(e.target.id);
     this.props.sendFriendRequest(id);
 
