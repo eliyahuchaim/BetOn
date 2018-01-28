@@ -97,4 +97,23 @@ export default class UsersApi {
     .then(resp => resp.json())
   };
 
+  static createParty(payload){
+    debugger;
+    const data = {
+      // put payload
+    }
+
+
+    return fetch('http://localhost:3000/api/v1/parties', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.what_you_looking_at}`,
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(data)
+    })
+    .then(resp => resp.json());
+  }
+
 } // end of class

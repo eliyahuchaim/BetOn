@@ -43,6 +43,13 @@ const NavBar = (props) => {
         activeStyle={{
         background: '#868079'}}
         >Find Users</NavLink>
+        <NavLink
+        to = '/create-party'
+        exact
+        style={link}
+        activeStyle={{
+        background: '#868079'}}
+        >Create a Party</NavLink>
       </div>
     )
   } else {

@@ -12,6 +12,7 @@ import SearchUser from './components/search-users';
 import UserPage from './components/users-page';
 import PublicUserPage from './components/public-users-page';
 import FriendRequest from './components/friend-requests';
+import CreateParty from './components/create-party';
 import {logout} from './actions/usersActions';
 
 
@@ -35,6 +36,7 @@ class App extends Component {
             <Route exact path='/login' component={Sessions} />
             <Route exact path='/search' component={SearchUser} />
             <Route exact path='/userpage' component={UserPage} />
+            <Route exact path='/create-party' component={CreateParty} />
           </div>
         </div>
       </Router>

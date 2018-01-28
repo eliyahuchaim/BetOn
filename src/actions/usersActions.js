@@ -88,3 +88,8 @@ export function updateFriendRequest(request) {
     return UsersApi.updateFriendRequest(request)
     .then(resp => {console.log(resp);})
 };
+
+export function createParty(payload){
+  return UsersApi.createParty(payload)
+  .then(resp => resp.json());
+};
