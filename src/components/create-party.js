@@ -27,7 +27,11 @@ class CreateParty extends React.Component{
 
   mainCreateParty = () => {
     console.log(this.state);
-    // debugger;
+    const payload = {
+      partyInfo : this.state.partyTitle,
+      invites : this.state.friendsToInvite
+    }
+    this.props.createParty(payload, this.props);
   }
 
   whatToRender = () => {
@@ -187,7 +191,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    usersFriends: usersFriends
+    usersFriends: usersFriends,
+    createParty: createParty
   }, dispatch)
 }
 

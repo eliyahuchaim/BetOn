@@ -98,13 +98,55 @@ export default class UsersApi {
   };
 
   static createParty(payload){
-    debugger;
     const data = {
-      // put payload
-    }
-
+      party : {
+        title: payload.partyInfo
+      }
+    };
 
     return fetch('http://localhost:3000/api/v1/parties', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.what_you_looking_at}`,
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(data)
+    })
+    .then(resp => resp.json());
+  }
+
+  static inviteToParty(payload){
+
+    const data = {
+      party: {
+        party_id: payload.party_id,
+        invited_user_id: payload.user_id
+      }
+    }
+
+    return fetch('http://localhost:3000/api/v1/invitetoparty', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.what_you_looking_at}`,
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(data)
+    })
+    .then(resp => resp.json());
+  }
+
+  static massInviteToParty(payload){
+
+    const data = {
+      party: {
+        party_id: payload.party_id,
+        users_arr: payload.users_arr
+      }
+    }
+
+    return fetch('http://localhost:3000/api/v1/mass_invite', {
       headers: {
         'Authorization': `Bearer ${localStorage.what_you_looking_at}`,
         'accept': 'application/json',

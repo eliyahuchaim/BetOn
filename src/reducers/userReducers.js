@@ -29,7 +29,6 @@ let newState;
       return newState;
     case 'FRIENDS':
       newState = Object.assign({}, state, {friends: action.payload})
-      // console.log(newState);
       return newState;
     default:
       return state;

@@ -89,7 +89,31 @@ export function updateFriendRequest(request) {
     .then(resp => {console.log(resp);})
 };
 
-export function createParty(payload){
-  return UsersApi.createParty(payload)
-  .then(resp => resp.json());
+function inviteFriendsToParty(partyId ,payload) {
+  if (Object.keys(payload.invites).length > 1) {
+    const idsArr = [];
+    for (var name in payload.invites) {
+      idsArr.push(payload.invites[name].id);
+    }
+    return UsersApi.massInviteToParty({party_id: partyId, users_arr: idsArr});
+  } else {
+    return UsersApi.inviteToParty({party_id: partyId, user_id: payload.invites[Object.keys(payload.invites)].id})
+  }
+
+}
+
+export function createParty(payload, props){
+  return dispatch => {
+    return UsersApi.createParty(payload)
+    .then(resp => {
+      if (typeof resp.party.id == "number") {
+        return inviteFriendsToParty(resp.party.id, payload)
+        .then(resp => {
+          // NOTE: add a check for error here
+          console.log(resp);
+          props.history.push('/userpage');
+        })
+      }
+    });
+  }
 };
