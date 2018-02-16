@@ -2,19 +2,22 @@ export default function usersReducer(state = {
   user_info: [],
   public_user : [],
   loading: false,
-  friends: {friends: {}, requests: {}}
+  friends: {friends: {}, requests: {}},
+  parties: [],
+  wagers: [],
+  bets: []
 }, action){
 let newState;
   switch (action.type) {
     case 'SIGN_UP':
-      newState = Object.assign({}, state, {user: action.payload, loading: false})
+      newState = Object.assign({}, state, {user: action.payload, loading: false});
       console.log(newState);
       return newState;
     case 'LOGIN':
       localStorage.setItem("what_you_looking_at", action.payload.what_you_looking_at);
       return state;
     case 'LOADING':
-      newState = Object.assign({}, state, {loading: true})
+      newState = Object.assign({}, state, {loading: true});
       return newState;
     case 'LOGOUT':
       newState = Object.assign({}, state, {user_info: []});
@@ -22,13 +25,16 @@ let newState;
       console.log("User was logged out");
       return newState;
     case 'PUBLIC_USER':
-      newState = Object.assign({}, state, {public_user: action.payload})
+      newState = Object.assign({}, state, {public_user: action.payload});
       return newState;
     case 'CURRENT_USER':
-      newState = Object.assign({}, state, {user_info: action.payload})
+      newState = Object.assign({}, state, {user_info: action.payload});
       return newState;
     case 'FRIENDS':
-      newState = Object.assign({}, state, {friends: action.payload})
+      newState = Object.assign({}, state, {friends: action.payload});
+      return newState;
+    case 'PARTIES':
+      newState = Object.assign({}, state, {parties: action.payload});
       return newState;
     default:
       return state;

@@ -117,3 +117,19 @@ export function createParty(payload, props){
     });
   }
 };
+
+export function usersParties(){
+  return dispatch => {
+    return UsersApi.usersParties()
+    .then(resp => {
+      try {
+        dispatch({
+          type: 'PARTIES',
+          payload: resp
+        })
+      } catch (e) {
+        console.error(e);
+      }
+    });
+  }
+}

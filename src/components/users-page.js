@@ -2,6 +2,7 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {CurrentUserInfo, usersFriends} from '../actions/usersActions';
+import Parties from '../containers/parties';
 import { Grid, Image, Card, Icon, Menu, Label, Sidebar, Segment, Header, Button, Loader} from 'semantic-ui-react';
 import {withRouter} from 'react-router-dom';
 
@@ -11,7 +12,12 @@ class UserPage extends React.Component{
     super(props)
     this.state = {
       visible: false,
-      activeItem: ""
+      activeItem: "",
+      whatToShow : {
+        parties: true,
+        bets: false,
+        wagers: false
+      }
     };
   };
 
@@ -35,6 +41,38 @@ class UserPage extends React.Component{
     this.props.history.push('/requests');
   }
 
+  whatToShow = () => {
+    for (let key in this.state.whatToShow){
+      if (this.state.whatToShow[key]){
+        if (key === 'parties'){
+          return (
+            <div>
+              <Parties />
+            </div>
+          )
+        } else if (key === 'wagers') {
+          return null;
+        } else if (key === 'bets') {
+          return null;
+        }
+      }
+    }
+  }
+
+  toggleWhatToShow = (e) => {
+    let tempState = {...this.state.whatToShow};
+    for (let key in tempState) {
+      if (tempState[key]){
+        tempState[key] = false,
+        tempState[e.target.id] = true
+        break;
+      }
+    }
+    this.setState({
+      whatToShow: tempState
+    });
+  }
+
   jsx = () => {
     return (
       <Grid>
@@ -45,24 +83,25 @@ class UserPage extends React.Component{
         </Grid.Column>
         <Grid.Column width={9}>
           <Button onClick={this.toggleVisibility}>Toggle Visibility</Button>
+          <Sidebar as={Menu} animation='push' direction='top' visible={this.state.visible} inverted>
+            <Menu.Item name='parties' id='parties' onClick={this.toggleWhatToShow}>
+              <Icon name='users' id='parties'/>
+              Parties
+            </Menu.Item>
+            <Menu.Item name='bets' id='bets' onClick={this.toggleWhatToShow}>
+              <Icon name='hand victory' id='bets'/>
+              Bets
+            </Menu.Item>
+            <Menu.Item name='wagers' id='wagers' onClick={this.toggleWhatToShow}>
+              <Icon name='dollar' id='wagers'/>
+              Wagers
+            </Menu.Item>
+          </Sidebar>
           <Sidebar.Pushable as={Segment}>
-            <Sidebar as={Menu} animation='push' direction='bottom' visible={this.state.visible} inverted>
-              <Menu.Item name='parties'>
-                <Icon name='users' />
-                Parties
-              </Menu.Item>
-              <Menu.Item name='bets'>
-                <Icon name='hand victory' />
-                Bets
-              </Menu.Item>
-              <Menu.Item name='wagers'>
-                <Icon name='dollar' />
-                Wagers
-              </Menu.Item>
-            </Sidebar>
             <Sidebar.Pusher>
               <Segment basic>
                 <Header as='h3'>Application Content</Header>
+                {this.whatToShow()}
                 <Image src='/assets/images/wireframe/paragraph.png' />
               </Segment>
             </Sidebar.Pusher>
